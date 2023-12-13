@@ -1,3 +1,5 @@
+import categories from "../constants/categories";
+
 interface Props {
   onFilterChange: (e: React.ChangeEvent) => void;
 }
@@ -13,9 +15,11 @@ const ExpenseFilter = ({ onFilterChange }: Props) => {
         onChange={onFilterChange}
       >
         <option>All categories</option>
-        <option value="Groceries">Groceries</option>
-        <option value="Utilities">Utilities</option>
-        <option value="Entertainment">Entertainment</option>
+        {categories.map((category) => (
+          <option value={category} key={category}>
+            {category}
+          </option>
+        ))}
       </select>
     </>
   );

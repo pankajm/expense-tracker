@@ -1,6 +1,7 @@
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import categories from "../constants/categories";
 
 const schema = z.object({
   description: z.string().min(1, { message: "Provide Valid Description" }),
@@ -75,9 +76,11 @@ const ExpenseForm = ({ onFormSubmit }: Props) => {
           {...register("category")}
         >
           <option></option>
-          <option>Groceries</option>
-          <option>Utilities</option>
-          <option>Entertainment</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
         {errors.category && (
           <p className="text-danger mt-2">{errors.category.message}</p>
